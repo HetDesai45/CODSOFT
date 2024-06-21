@@ -1,0 +1,127 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+header nav ul li {
+  margin: 0 1rem;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+/* Section 1 */
+#section1 {
+  text-align: center;
+  padding: 2rem;
+  background: #f4f4f4;
+}
+
+#section1 button {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+#section1 button:hover {
+  background: #555;
+}
+
+/* Section 3 */
+.services {
+  display: flex;
+  justify-content: space-around;
+}
+
+.service {
+  text-align: center;
+  width: 30%;
+}
+
+.service img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+/* Section 4 */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-top: 1rem;
+}
+
+form input, form textarea {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+form button {
+  margin-top: 1rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #555;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #333;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services {
+      flex-direction: column;
+  }
+
+  .service {
+      width: 100%;
+      margin-bottom: 2rem;
+  }
+}
