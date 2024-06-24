@@ -11,7 +11,7 @@ body{
 
 a{
   text-decoration: none;
-  color: black;
+  color: aqua;
 }
 
 header{
@@ -37,7 +37,7 @@ h1{
   width: 50%;
   max-width: 300px;
   border-radius: 100%;
-  border: 10ox solid #333;
+  border: 10px solid #333;
 }
 
 .quote{
@@ -55,8 +55,40 @@ h1{
   font-size: 19px;
 }
 
+.container{
+  color: rgb(0, 0, 0);
+  background-color: rgb(168, 222, 255);
+}
+
+.bio ul li{
+    list-style-image: url(/right-arrow.svg);
+    /* OR */
+    list-style-type: '👉';
+    padding-inline-start: 1ch;
+}
+
+.bio ul h1{
+  text-align: center;
+}
+
 footer{
   background-color: #333;
   color: #fff;
   padding: 10px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
+
+@media(max-width: 1079px){
+  .bio{
+    margin: 50px 70px;
+    text-align: justify;
+  }
+}
+
+@media(max-width: 600px){
+  .bio{
+    margin: 50px 25px;
+  }
 }
