@@ -1,0 +1,117 @@
+# Ignore node_modules directory (for Node.js projects)
+node_modules/
+
+# Ignore log files and directories
+logs/
+*.log
+npm-debug.log*
+
+# Ignore environment variable files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore build directories and files (e.g., for JavaScript projects)
+dist/
+build/
+out/
+
+# Ignore temporary files and directories
+tmp/
+temp/
+*.tmp
+*.swp
+
+# Ignore coverage reports
+coverage/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignore dependency directories (for various languages)
+vendor/
+bin/
+obj/
+
+# Ignore compiled source files (for various languages)
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+*.pyo
+
+# Ignore generated documentation
+doc/
+*.pdf
+
+# Ignore archives and binary files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.gz
+*.bz2
+
+# Ignore specific files for specific frameworks/languages
+
+# Rails
+*.rbc
+*.pid
+*.seed
+*.sqlite3
+*.sql
+
+# Laravel
+/vendor
+/public/storage
+/storage/*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.pylintrc
+*.venv
+venv/
+ENV/
+env/
+env.bak/
+*.config
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Go
+*.exe
+*.test
+*.out
+
+# Rust
+/target/
+**/*.rs.bk
+
+# Ruby
+*.gem
+*.rbc
+.bundle
+.config
+.yardoc
+_byebug_history
