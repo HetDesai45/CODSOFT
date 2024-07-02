@@ -64,12 +64,22 @@ exports.showjob = async (req,res,next) =>{
   let cat = req.query.cat;
   let categ = cat !== '' ? cat : ids;
 
+  let locations = [];
+  const jobByLocation = await job.find({},{location: 1});
+  jobByLocation.forEach(val =>{
+    locations.push(val.location);
+  })
+  let setUniqueLocation = [...new set(locations)];
+  let location = req.query.location;
+  let locationFilter = location !== '' ? location : setUniqueLocation;
+
+
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
   const count = await job.find({...keyword, jobType: categ}).countDocuments();
 
   try {
-    const Job = await job.find({...keyword, jobType: categ}).skip(pageSize*(page-1)).limit(pageSize);
+    const Job = await job.find({...keyword, jobType: categ, location: locationFilter}).skip(pageSize*(page-1)).limit(pageSize);
     res.status(200).json({
       success: true,
       Job,
