@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/job/create', isAuthenticated, isAdmin, createJob);
 router.get('/job/:id', signlejob);
 router.put('/job/update/:job_id', isAuthenticated, isAdmin, updatejob);
-router.get('/job/show',showjob);
+router.get('/jobs/show',showjob);
 
 module.exports = router;
