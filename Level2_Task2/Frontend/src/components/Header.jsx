@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box , styled} from '@mui/material';
-import headerimg from '../images/headerimage.avif';
+import headerimg from '../images/bg.jpg';
 
 const Header = () => {
   const StyleHeader = styled(Box)(({theme})=>({

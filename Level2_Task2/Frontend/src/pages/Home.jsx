@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
-import { Box, Card, Container, Stack, Typography } from "@mui/material";
-import { useTheme } from "@emotion/react";
-import {useDispatch} from 'react-redux';
+import { Box, Card, Container, Stack, Typography, useTheme } from "@mui/material";
+
+import {useDispatch, useSelector} from 'react-redux';
 import { jobLoadAction } from "../Redux/actions/jobAction";
 import { useParams } from "react-router-dom";
+import CardElement from "../components/CardElement";
 
 const Home = () => {
+  const {jobs, SetUniqueLocation, pages, loading} = useSelector(state=>state.loadJobs);
   const {palette} = useTheme();
   const dispatch = useDispatch();
   const { keyword, location} = useParams();
@@ -18,6 +20,7 @@ const Home = () => {
   useEffect(()=>{
     dispatch(jobLoadAction(page, keyword, cat, location));
   },[page,keyword,cat,location])
+
   return (
     <>
       <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh" }}>
@@ -40,7 +43,20 @@ const Home = () => {
                 </Box>
               </Card>
             </Box>
-            <Box sx={{ flex: 2, p: 2 }}></Box>
+            <Box sx={{ flex: 5, p: 2 }}>
+              {
+                jobs && jobs.map((job,i)=>{
+                  <CardElement
+                    key={i}
+                    id={job._id}
+                    jobTitle={job.title}
+                    description={job.description}
+                    category={job.jobType ? job.jobType.jobTypeName : "No category"}
+                    location={job.location}
+                  />
+                })
+              }
+            </Box>
           </Stack>
         </Container>
       </Box>
