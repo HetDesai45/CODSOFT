@@ -1,15 +1,17 @@
-import {createStore,combineReducers, applyMiddleware} from 'redux';
+import {combineReducers, applyMiddleware} from 'redux';
+import {configureStore} from "@reduxjs/toolkit"
 import {thunk} from 'redux-thunk';
 import {composeWithDevTools} from '@redux-devtools/extension';
 import { loadJobReducer } from './reducers/jobReducer';
 
-const reducer = combineReducers({
-  loadJobs: loadJobReducer,
+const reducer1 = combineReducers({
+  loadjob: loadJobReducer,
   // jobTypeAll: loadJobTypeReducer
 })
 
 let initialState = {};
 const middleware = [thunk];
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = configureStore({reducer: reducer1,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware)})
 
 export default store;

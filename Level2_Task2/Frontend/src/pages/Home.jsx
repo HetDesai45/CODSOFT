@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
-import { Box, Card, Container, Stack, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  Container,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { jobLoadAction } from "../Redux/actions/jobAction";
 import { useParams } from "react-router-dom";
 import CardElement from "../components/CardElement";
 
 const Home = () => {
-  const {jobs, SetUniqueLocation, pages, loading} = useSelector(state=>state.loadJobs);
-  const {palette} = useTheme();
+  const { job, SetUniqueLocation, pages, loading } = useSelector(
+    (state) => state.loadjob
+  );
+  const { palette } = useTheme();
   const dispatch = useDispatch();
-  const { keyword, location} = useParams();
-  const [page,setPage] = useState(1);
-  const [cat, setCat] = useState('');
+  const { keyword, location } = useParams();
+  const [page, setPage] = useState(1);
+  const [cat, setCat] = useState("");
 
-
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
-  },[page,keyword,cat,location])
+  }, [page, keyword, cat, location]);
 
   return (
     <>
@@ -44,18 +52,19 @@ const Home = () => {
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>
-              {
-                jobs && jobs.map((job,i)=>{
+              {job &&
+                job.map((jobb, i) => (
                   <CardElement
                     key={i}
-                    id={job._id}
-                    jobTitle={job.title}
-                    description={job.description}
-                    category={job.jobType ? job.jobType.jobTypeName : "No category"}
-                    location={job.location}
+                    id={jobb._id}
+                    jobTitle={jobb.title}
+                    description={jobb.description}
+                    category={
+                      jobb.jobType ? jobb.jobType.jobTypeName : "No category"
+                    }
+                    location={jobb.location}
                   />
-                })
-              }
+                ))}
             </Box>
           </Stack>
         </Container>

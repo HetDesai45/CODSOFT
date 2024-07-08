@@ -14,7 +14,6 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
   const { palette } = useTheme();
   return (
     <Card sx={{ minWidth: 275, mb: 3, mt: 3 }}>
-      <h1>hello</h1>
       <CardContent>
         <Typography
           sx={{ fontSize: 15, color: palette.secondary.main, fontWeight: 500 }}
