@@ -46,7 +46,7 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
         >
           <Link
             style={{ textDecoration: "none", color: "white", boxShadow: 0 }}
-            to={`/jobs/${id}`}
+            to={`/job/${id}`}
           >
             More Details
           </Link>
