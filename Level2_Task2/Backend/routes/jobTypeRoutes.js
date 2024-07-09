@@ -4,7 +4,7 @@ const { createJobType, allJobsType, updateJobType, deleteJobType } = require('..
 const router = express.Router();
 
 router.post('/type/create', isAuthenticated, createJobType);
-router.get('/type/jobs', isAuthenticated, allJobsType);
+router.get('/type/jobs', allJobsType);
 router.put('/type/update/:type_id',isAuthenticated,isAdmin, updateJobType);
 router.delete('/type/delete/:type_id',isAuthenticated,isAdmin, deleteJobType);
 

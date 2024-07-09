@@ -4,8 +4,9 @@ const initialState = {
   loading: false,
   success: false,
   job: [],
+  setUniqueLocation: [],
   pages: 0,
-  count: 0,
+  count: 0
 };
 
 export const loadJobReducer = (state=initialState,action)=>{
@@ -20,7 +21,7 @@ export const loadJobReducer = (state=initialState,action)=>{
         page: action.payload.page,
         pages: action.payload.pages,
         count: action.payload.count,
-        SetUniqueLocation: action.payload.SetUniqueLocation,
+        setUniqueLocation: action.payload.setUniqueLocation,
         job: action.payload.jobs
       }
     case JOB_LOAD_FAIL:

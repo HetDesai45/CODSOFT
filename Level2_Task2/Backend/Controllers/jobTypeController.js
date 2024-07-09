@@ -18,7 +18,7 @@ exports.createJobType = async(req,res,next) =>{
 
 exports.allJobsType = async(req,res,next)=>{
   try {
-    const jobt = await jobType.find();
+    const jobt = await jobType.find({});
     res.status(200).json({
       success: true,
       jobt

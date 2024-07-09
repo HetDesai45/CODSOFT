@@ -13,6 +13,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/search/location/:location" element={<Home/>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
