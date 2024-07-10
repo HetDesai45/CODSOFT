@@ -12,12 +12,17 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import WorkIcon from "@mui/icons-material/Work";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogoutAction } from "../Redux/actions/userAction";
 
 const pages = ["Home", "Log In"];
 
-function Navbar() {
+const Navbar = () => {
+  const { userInfo } = useSelector((state) => state.signIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { palette } = useTheme();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -35,6 +40,14 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const logoutUser = () => {
+    dispatch(userLogoutAction());
+    window.location.reload(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
   };
 
   return (
@@ -164,37 +177,38 @@ function Navbar() {
                   </Link>
                 </Typography>
               </MenuItem>
-
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
+              {!userInfo ? (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: palette.primary.main,
+                      }}
+                      to="/login"
+                    >
+                      Log In
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={logoutUser}>
+                  <Typography
                     style={{
                       textDecoration: "none",
                       color: palette.primary.main,
                     }}
-                    to="/login"
+                    textAlign="center"
                   >
-                    Log In
-                  </Link>
-                </Typography>
-              </MenuItem>
-
-              <MenuItem>
-                <Typography
-                  style={{
-                    textDecoration: "none",
-                    color: palette.primary.main,
-                  }}
-                  textAlign="center"
-                >
-                  Log Out
-                </Typography>
-              </MenuItem>
+                    Log Out
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default Navbar;

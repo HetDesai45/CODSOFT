@@ -28,7 +28,9 @@ const Login = () => {
   const {isAuthenticated} = useSelector((state)=>state.signIn);
 
   useEffect(()=>{
-    navigate('/user/dashboard')
+    if(isAuthenticated){
+      navigate('/user/dashboard')
+    }
   },[isAuthenticated])
   const formik = useFormik({
     initialValues:{

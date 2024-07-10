@@ -10,7 +10,7 @@ const reducer1 = combineReducers({
   loadjob: loadJobReducer,
   jobTypeAll: loadJobTypeReducer,
   signIn: userReducerSignIn,
-  logout: userReducerLogout
+  logOut: userReducerLogout
 })
 
 const middleware = [thunk];
