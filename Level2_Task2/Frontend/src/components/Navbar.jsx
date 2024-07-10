@@ -158,7 +158,7 @@ function Navbar() {
                       textDecoration: "none",
                       color: palette.primary.main,
                     }}
-                    to="/admin/dashboard"
+                    to="/user/dashboard"
                   >
                     Dashboard
                   </Link>
