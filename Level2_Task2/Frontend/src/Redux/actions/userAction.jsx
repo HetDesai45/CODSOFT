@@ -15,8 +15,10 @@ import {
 export const userSignInAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
   try {
-    const { data } = await axios.post(`http://localhost:8000/api/signin`, user);
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    const { data } = await axios.post(`http://localhost:8000/api/signin`, user,{
+      withCredentials: true,
+    });
+    localStorage.setItem("userInfo", JSON.stringify(data));
 
     dispatch({
       type: USER_SIGNIN_SUCCESS,
@@ -35,13 +37,12 @@ export const userSignInAction = (user) => async (dispatch) => {
   }
 };
 
-
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: USER_LOGOUT_REQUEST });
   try {
     const { data } = await axios.get(`http://localhost:8000/api/logout`);
-    localStorage.removeItem('userInfo');
-    
+    localStorage.removeItem("userInfo");
+
     dispatch({
       type: USER_LOGOUT_SUCCESS,
       payload: data,
@@ -63,7 +64,7 @@ export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOAD_REQUEST });
   try {
     const { data } = await axios.get(`http://localhost:8000/api/me`);
-    
+
     dispatch({
       type: USER_LOAD_SUCCESS,
       payload: data,

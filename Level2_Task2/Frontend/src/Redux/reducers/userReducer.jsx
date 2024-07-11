@@ -22,6 +22,12 @@ const initialState = {
   },
 };
 
+const initialstate1 = {
+  loading: false,
+  success: false,
+  user: null,
+};
+
 export const userReducerSignIn = (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
@@ -71,22 +77,21 @@ export const userReducerLogout = (state = {}, action) => {
   }
 };
 
-
-export const userReducerProfile = (state = { user: null }, action) => {
+export const userReducerProfile = (state = initialstate1, action) => {
   switch (action.type) {
-      case USER_LOAD_REQUEST:
-          return { loading: true, user: null }
-      case USER_LOAD_SUCCESS:
-          return {
-              loading: false,
-              user: action.payload.user,
-          }
-      case USER_LOAD_FAIL:
-          return { loading: false, user: null, error: action.payload }
-      case USER_LOAD_RESET:
-          return {}
-      default:
-          return state;
+    case USER_LOAD_REQUEST:
+      return { ...state, loading: true, user: null };
+    case USER_LOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload.user,
+      };
+    case USER_LOAD_FAIL:
+      return {...state, loading: false, user: null, error: action.payload };
+    case USER_LOAD_RESET:
+      return {};
+    default:
+      return state;
   }
-
-}
+};
