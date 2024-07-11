@@ -20,4 +20,4 @@ const Layout = (Component) => ({ ...props }) => {
     )
 }
 
-export default Layout
+export default Layout;
