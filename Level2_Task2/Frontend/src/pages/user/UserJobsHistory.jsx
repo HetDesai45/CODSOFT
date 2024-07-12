@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from '../../Redux/actions/userAction';
+import CardElement from '../../components/CardElement';
 
 const UserJobsHistory = () => {
 
@@ -16,8 +17,13 @@ const UserJobsHistory = () => {
         <Typography variant='h4' sx={{color: "#fafafa"}}>Jobs History</Typography>
         <Box>
           {
-            user && user.jobsHistory.map((history)=>(
-              <h3>{history.title}</h3>
+            user && user.jobsHistory.map((history, i)=>(
+              <CardElement  key={i}
+              id={history._id}
+              jobTitle={history.title}
+              description={history.description}
+              category=''
+              location={history.location}/>
             ))
           }
         </Box>

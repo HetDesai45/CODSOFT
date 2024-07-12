@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
-const { configDotenv } = require("dotenv");
+const morgan = require("morgan");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
@@ -16,6 +16,7 @@ mongoose.connect(process.env.DATABASE)
 .then(()=>console.log("Database connected"))
 .catch((err)=>console.log(err));
 
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());

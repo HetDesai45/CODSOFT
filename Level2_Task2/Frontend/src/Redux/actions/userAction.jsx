@@ -12,6 +12,9 @@ import {
   USER_SIGNIN_SUCCESS,
 } from "../constants/userConstant";
 
+
+axios.defaults.withCredentials = true; 
+
 export const userSignInAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
   try {

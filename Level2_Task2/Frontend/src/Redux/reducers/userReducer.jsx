@@ -25,7 +25,7 @@ const initialState = {
 const initialstate1 = {
   loading: false,
   success: false,
-  user: null,
+  user: {},
 };
 
 export const userReducerSignIn = (state = initialState, action) => {
