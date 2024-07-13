@@ -171,9 +171,22 @@ const Navbar = () => {
                       textDecoration: "none",
                       color: palette.primary.main,
                     }}
+                    to="/admin/dashboard"
+                  >
+                    Admin Dashboard
+                  </Link>
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: palette.primary.main,
+                    }}
                     to="/user/dashboard"
                   >
-                    Dashboard
+                    User Dashboard
                   </Link>
                 </Typography>
               </MenuItem>

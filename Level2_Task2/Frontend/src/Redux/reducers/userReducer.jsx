@@ -1,8 +1,8 @@
 import {
-  USER_LOAD_FAIL,
-  USER_LOAD_REQUEST,
-  USER_LOAD_RESET,
-  USER_LOAD_SUCCESS,
+  USER_LOADING_FAIL,
+  USER_LOADING_REQUEST,
+  USER_LOADING_RESET,
+  USER_LOADING_SUCCESS,
   USER_LOGOUT_FAIL,
   USER_LOGOUT_REQUEST,
   USER_LOGOUT_RESET,
@@ -25,7 +25,7 @@ const initialState = {
 const initialstate1 = {
   loading: false,
   success: false,
-  user: {},
+  user: null,
 };
 
 export const userReducerSignIn = (state = initialState, action) => {
@@ -79,17 +79,17 @@ export const userReducerLogout = (state = {}, action) => {
 
 export const userReducerProfile = (state = initialstate1, action) => {
   switch (action.type) {
-    case USER_LOAD_REQUEST:
+    case USER_LOADING_REQUEST:
       return { ...state, loading: true, user: null };
-    case USER_LOAD_SUCCESS:
+    case USER_LOADING_SUCCESS:
       return {
         ...state,
         loading: false,
         user: action.payload.user,
       };
-    case USER_LOAD_FAIL:
+    case USER_LOADING_FAIL:
       return {...state, loading: false, user: null, error: action.payload };
-    case USER_LOAD_RESET:
+    case USER_LOADING_RESET:
       return {};
     default:
       return state;

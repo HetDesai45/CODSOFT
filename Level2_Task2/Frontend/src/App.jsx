@@ -11,9 +11,11 @@ import UserRoute from "./components/UserRoute";
 import Layout from "./pages/global/Layout";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
+import UserInfoDashboard from "./pages/user/UserInfoDashboard";
 
 const UserDadhboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
+const UserInfoDashboardHOC = Layout(UserInfoDashboard);
 
 function App() {
   return (
@@ -40,6 +42,14 @@ function App() {
                   element={
                     <UserRoute>
                       <UserJobsHistoryHOC />
+                    </UserRoute>
+                  }
+                />
+                <Route
+                  path="/user/info"
+                  element={
+                    <UserRoute>
+                      <UserInfoDashboardHOC />
                     </UserRoute>
                   }
                 />
