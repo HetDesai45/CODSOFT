@@ -1,52 +1,53 @@
 import { Avatar, Box } from "@mui/material";
-import LockClockOutlined from '@mui/icons-material/LockClockOutlined'
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import LockClockOutlined from "@mui/icons-material/LockClockOutlined";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { userSignInAction } from "../Redux/actions/userAction";
-
 
 const validationSchema = yup.object({
   email: yup
     .string("Enter Your Email")
     .email("Enter a valid email")
     .required("Email is Required"),
-  password: yup
-  .string("Enter Password")
-  .required("Password is Required"),
-})
+  password: yup.string("Enter Password").required("Password is Required"),
+});
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isAuthenticated} = useSelector((state)=>state.signIn);
+  const { isAuthenticated, userInfo } = useSelector((state) => state.signIn);
 
-  useEffect(()=>{
-    if(isAuthenticated){
-      navigate('/user/dashboard')
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userInfo.role === 1) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
     }
-  },[isAuthenticated])
+  }, [isAuthenticated]);
   const formik = useFormik({
-    initialValues:{
-      email: '',
-      password: ''
+    initialValues: {
+      email: "",
+      password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values,actions) =>{
+    onSubmit: (values, actions) => {
       //alert(JSON.stringify(values,null,2));
-      dispatch(userSignInAction(values))
+      dispatch(userSignInAction(values));
       actions.resetForm();
-    }
+    },
   });
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Box
         sx={{
           height: "81vh",
@@ -111,7 +112,7 @@ const Login = () => {
           </Box>
         </Box>
       </Box>
-      <Footer/>
+      <Footer />
     </>
   );
 };
