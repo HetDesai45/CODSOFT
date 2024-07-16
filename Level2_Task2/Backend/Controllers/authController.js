@@ -53,7 +53,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   res
     .status(codeStatus)
     .cookie("token", token, options)
-    .json({ success: true, user});
+    .json({ success: true,role: user.role, user});
 };
 
 exports.logout = (req, res, next) => {

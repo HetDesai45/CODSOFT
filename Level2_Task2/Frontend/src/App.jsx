@@ -14,11 +14,16 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
 import UserInfoDashboard from "./pages/user/UserInfoDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import SingleJob from "./pages/SingleJob";
+import DashUsers from "./pages/admin/DashUsers";
+import DashJobs from "./pages/admin/DashJobs";
 
 const UserDadhboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
 const UserInfoDashboardHOC = Layout(UserInfoDashboard);
 const AdminDashboardHOC = Layout(AdminDashboard);
+const DashUsersHOC = Layout(DashUsers);
+const DashJobsHOC = Layout(DashJobs);
 
 function App() {
   return (
@@ -32,11 +37,28 @@ function App() {
                 <Route path="/search/location/:location" element={<Home />} />
                 <Route path="/search/:keyword" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/job/:id" element={<SingleJob />} />
                 <Route
                   path="/admin/dashboard"
                   element={
                     <AdminRoute>
                       <AdminDashboardHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/users"
+                  element={
+                    <AdminRoute>
+                      <DashUsersHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/jobs"
+                  element={
+                    <AdminRoute>
+                      <DashJobsHOC />
                     </AdminRoute>
                   }
                 />

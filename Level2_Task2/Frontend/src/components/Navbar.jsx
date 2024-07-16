@@ -53,7 +53,7 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Container>
-        {/* principal Menu */}
+      
         <Toolbar disableGutters>
           <WorkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -130,7 +130,7 @@ const Navbar = () => {
             JOB BOARD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* menu desktop */}
+
 
             <Button
               onClick={handleCloseNavMenu}
