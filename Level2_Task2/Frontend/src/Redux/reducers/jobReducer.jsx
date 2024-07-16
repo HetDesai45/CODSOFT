@@ -1,4 +1,17 @@
-import { JOB_LOAD_FAIL, JOB_LOAD_REQUEST, JOB_LOAD_RESET, JOB_LOAD_SINGLE_FAIL, JOB_LOAD_SINGLE_REQUEST, JOB_LOAD_SINGLE_RESET, JOB_LOAD_SINGLE_SUCCESS, JOB_LOAD_SUCCESS } from "../constants/jobconstant";
+import {
+  ALLJOB_LOAD_FAIL,
+  ALLJOB_LOAD_REQUEST,
+  ALLJOB_LOAD_RESET,
+  ALLJOB_LOAD_SUCCESS,
+  JOB_LOAD_FAIL,
+  JOB_LOAD_REQUEST,
+  JOB_LOAD_RESET,
+  JOB_LOAD_SINGLE_FAIL,
+  JOB_LOAD_SINGLE_REQUEST,
+  JOB_LOAD_SINGLE_RESET,
+  JOB_LOAD_SINGLE_SUCCESS,
+  JOB_LOAD_SUCCESS,
+} from "../constants/jobconstant";
 
 const initialState = {
   loading: false,
@@ -6,15 +19,15 @@ const initialState = {
   job: [],
   setUniqueLocation: [],
   pages: 0,
-  count: 0
+  count: 0,
 };
 
-export const loadJobReducer = (state=initialState,action)=>{
-  switch(action.type){
+export const loadJobReducer = (state = initialState, action) => {
+  switch (action.type) {
     case JOB_LOAD_REQUEST:
-      return{...state,loading: true}
+      return { ...state, loading: true };
     case JOB_LOAD_SUCCESS:
-      return{
+      return {
         ...state,
         loading: false,
         success: action.payload.success,
@@ -22,40 +35,66 @@ export const loadJobReducer = (state=initialState,action)=>{
         pages: action.payload.pages,
         count: action.payload.count,
         setUniqueLocation: action.payload.setUniqueLocation,
-        job: action.payload.jobs
-      }
+        job: action.payload.jobs,
+      };
     case JOB_LOAD_FAIL:
-      return{
+      return {
         ...state,
         loading: false,
-        error: action.payload
-      }
+        error: action.payload,
+      };
     case JOB_LOAD_RESET:
-      return{}
+      return {};
 
     default:
       return state;
   }
-}
+};
 
 export const loadJobSingleReducer = (state = { job: {} }, action) => {
   switch (action.type) {
-      case JOB_LOAD_SINGLE_REQUEST:
-          return { loading: true }
-      case JOB_LOAD_SINGLE_SUCCESS:
-          return {
-
-              loading: false,
-              success: action.payload.success,
-              singleJob: action.payload.Job,
-
-          }
-      case JOB_LOAD_SINGLE_FAIL:
-          return { loading: false, error: action.payload }
-      case JOB_LOAD_SINGLE_RESET:
-          return {}
-      default:
-          return state;
+    case JOB_LOAD_SINGLE_REQUEST:
+      return { loading: true };
+    case JOB_LOAD_SINGLE_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload.success,
+        singleJob: action.payload.Job,
+      };
+    case JOB_LOAD_SINGLE_FAIL:
+      return { loading: false, error: action.payload };
+    case JOB_LOAD_SINGLE_RESET:
+      return {};
+    default:
+      return state;
   }
+};
 
-}
+export const loadAdminJobReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ALLJOB_LOAD_REQUEST:
+      return { ...state, loading: true };
+    case ALLJOB_LOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload.success,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        count: action.payload.count,
+        setUniqueLocation: action.payload.setUniqueLocation,
+        job: action.payload.jobs,
+      };
+    case ALLJOB_LOAD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case ALLJOB_LOAD_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

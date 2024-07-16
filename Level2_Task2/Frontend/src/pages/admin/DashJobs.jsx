@@ -4,16 +4,16 @@ import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
-import { jobLoadAction } from "../../Redux/actions/jobAction";
+import { adminJobLoadAction } from "../../Redux/actions/jobAction";
 
 const DashJobs = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(jobLoadAction());
+    dispatch(adminJobLoadAction());
   }, []);
 
-  const { job, setUniqueLocation, pages, loading } = useSelector((state) => state.loadJob);
+  const { job,loading } = useSelector((state) => state.loadAdminJob);
   let data = [];
   data = job !== undefined && job.length > 0 ? job : [];
 
@@ -33,18 +33,6 @@ const DashJobs = () => {
       field: "title",
       headerName: "Job name",
       width: 150,
-    },
-    {
-      field: "jobType",
-      headerName: "Category",
-      width: 150,
-      valueGetter: (data) => data.row.jobType.jobTypeName,
-    },
-    {
-      field: "user",
-      headerName: "User",
-      width: 150,
-      valueGetter: (data) => data.row.user.firstName,
     },
     {
       field: "available",
@@ -116,7 +104,7 @@ const DashJobs = () => {
               "& .MuiTablePagination-displayedRows": {
                 color: "white",
               },
-              color: "white",
+              color: "black",
               [`& .${gridClasses.row}`]: {
                 bgcolor: (theme) =>
                   // theme.palette.mode === 'light' ? grey[200] : grey[900],

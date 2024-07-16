@@ -103,7 +103,7 @@ const DashUsers = () => {
                 "& .MuiTablePagination-displayedRows": {
                   color: "white",
                 },
-                color: "white",
+                color: "black",
                 [`& .${gridClasses.row}`]: {
                   bgcolor: (theme) =>
                     // theme.palette.mode === 'light' ? grey[200] : grey[900],
