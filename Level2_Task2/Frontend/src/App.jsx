@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import SingleJob from "./pages/SingleJob";
 import DashUsers from "./pages/admin/DashUsers";
 import DashJobs from "./pages/admin/DashJobs";
+import Signup from "./pages/Signup";
 
 const UserDadhboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/search/location/:location" element={<Home />} />
                 <Route path="/search/:keyword" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/job/:id" element={<SingleJob />} />
                 <Route
                   path="/admin/dashboard"

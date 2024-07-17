@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 //import sidebar hook
 import { useProSidebar } from 'react-pro-sidebar';
+import Navbar from '../../components/Navbar';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -75,7 +76,7 @@ const HeaderTop = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        HR APP
+                        <Navbar />
                     </Typography>
                     <Search>
                         <SearchIconWrapper>

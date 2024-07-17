@@ -6,12 +6,16 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { userSignInAction } from "../Redux/actions/userAction";
+import { userSignUpAction } from "../Redux/actions/userAction";
 
 const validationSchema = yup.object({
+  firstName: yup
+    .string("Enter Your FirstName")
+    .required("FirstName is Required"),
+  lastName: yup.string("Enter Your LastName").required("LastName is Required"),
   email: yup
     .string("Enter Your Email")
     .email("Enter a valid email")
@@ -19,32 +23,27 @@ const validationSchema = yup.object({
   password: yup.string("Enter Password").required("Password is Required"),
 });
 
-const Login = () => {
+const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, userInfo } = useSelector((state) => state.signIn);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (userInfo.role === 1) {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/user/dashboard");
-      }
-    }
-  }, [isAuthenticated]);
+  
   const formik = useFormik({
     initialValues: {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values, actions) => {
       //alert(JSON.stringify(values,null,2));
-      dispatch(userSignInAction(values));
+      dispatch(userSignUpAction(values));
       actions.resetForm();
+      navigate("/login")
     },
   });
+
   return (
     <>
       <Navbar />
@@ -72,6 +71,38 @@ const Login = () => {
             <Avatar sx={{ m: 1, bgcolor: "primary.main", mb: 3 }}>
               <LockClockOutlined />
             </Avatar>
+            <TextField
+              sx={{ mb: 3 }}
+              fullWidth
+              id="firstName"
+              label="First Name"
+              name="firstName"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="First Name"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+              helperText={formik.touched.firstName && formik.errors.firstName}
+            />
+            <TextField
+              sx={{ mb: 3 }}
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              placeholder="Last Name"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+            />
             <TextField
               sx={{ mb: 3 }}
               fullWidth
@@ -107,15 +138,14 @@ const Login = () => {
             />
 
             <Button fullWidth variant="contained" type="submit">
-              Log In
+              Sign Up
             </Button>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                <Link to="/signup" style={{ color: "blue", textDecoration: "none" }}>
-                  New Member?
-                </Link>
-
-            </Box>
           </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                <Link to="/login" style={{ color: "blue", textDecoration: "none" }}>
+                  Already Register?
+                </Link>
+            </Box>
         </Box>
       </Box>
       <Footer />
@@ -123,4 +153,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

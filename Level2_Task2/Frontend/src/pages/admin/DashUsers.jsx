@@ -90,12 +90,6 @@ const DashUsers = () => {
         <Typography variant="h4" sx={{ color: "white", pb: 3 }}>
           All users
         </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button variant="contained" color="success" startIcon={<AddIcon />}>
-            {" "}
-            Create user
-          </Button>
-        </Box>
         <Paper sx={{ bgcolor: "secondary.midNightBlue" }}>
           <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid

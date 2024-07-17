@@ -53,7 +53,6 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Container>
-      
         <Toolbar disableGutters>
           <WorkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -130,8 +129,6 @@ const Navbar = () => {
             JOB BOARD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-
-
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
@@ -164,32 +161,36 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: palette.primary.main,
-                    }}
-                    to="/admin/dashboard"
-                  >
-                    Admin Dashboard
-                  </Link>
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: palette.primary.main,
-                    }}
-                    to="/user/dashboard"
-                  >
-                    User Dashboard
-                  </Link>
-                </Typography>
-              </MenuItem>
+              {userInfo && userInfo.role === 1 ? (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: palette.primary.main,
+                      }}
+                      to="/admin/dashboard"
+                    >
+                      Admin Dashboard
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: palette.primary.main,
+                      }}
+                      to="/user/dashboard"
+                    >
+                      User Dashboard
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
+
               {!userInfo ? (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
