@@ -2,8 +2,8 @@ import {combineReducers, applyMiddleware} from 'redux';
 import {configureStore} from "@reduxjs/toolkit"
 import {thunk} from 'redux-thunk';
 import {composeWithDevTools} from '@redux-devtools/extension';
-import { loadAdminJobReducer, loadJobReducer, loadJobSingleReducer } from './reducers/jobReducer';
-import { loadJobTypeReducer } from './reducers/jobTypeReducer';
+import { deleteJobReducer, loadAdminJobReducer, loadJobReducer, loadJobSingleReducer, registerAjobReducer, updateJobReducer } from './reducers/jobReducer';
+import { createJobTypeReducer, deleteJobTypeReducer, loadJobTypeReducer } from './reducers/jobTypeReducer';
 import { allUserReducer, userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn, userReducerSignUp } from './reducers/userReducer';
 
 const reducer1 = combineReducers({
@@ -16,7 +16,12 @@ const reducer1 = combineReducers({
   singleJob: loadJobSingleReducer,
   userJobApplication: userApplyJobReducer,
   allUsers: allUserReducer,
-  loadAdminJob: loadAdminJobReducer
+  loadAdminJob: loadAdminJobReducer,
+  registerJob: registerAjobReducer,
+  deleteJob: deleteJobReducer,
+  deleteJobType: deleteJobTypeReducer,
+  createJobType: createJobTypeReducer,
+  updateJob: updateJobReducer
 })
 
 const middleware = [thunk];

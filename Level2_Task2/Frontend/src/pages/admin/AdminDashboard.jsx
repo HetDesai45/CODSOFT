@@ -6,8 +6,26 @@ import CategoryIcon from "@mui/icons-material/Category";
 import { Chart } from "react-google-charts";
 import { data, options } from './data/data'
 import ChartComponent from "../../components/ChartComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { jobTypeLoadAction } from "../../Redux/actions/jobTypeAction";
+import { useEffect } from "react";
+import { adminJobLoadAction } from "../../Redux/actions/jobAction";
+import { allUserAction } from "../../Redux/actions/userAction";
 
 const AdminDashboard = () => {
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(jobTypeLoadAction());
+        dispatch(adminJobLoadAction());
+        dispatch(allUserAction());
+    }, []);
+
+
+    const { jobType, loading } = useSelector(state => state.jobTypeAll);
+    const { job } = useSelector((state) => state.loadAdminJob);
+    const { users} = useSelector((state) => state.allUsers);
+
   return (
     <>
       <Box>
@@ -19,43 +37,28 @@ const AdminDashboard = () => {
           spacing={{ xs: 1, sm: 2, md: 4 }}
         >
           <StatComponent
-            value="45621"
+            value={users.length}
             icon={
               <SupervisorAccountIcon sx={{ color: "#fafafa", fontSize: 30 }} />
             }
-            description="Administrators"
+            description="Users"
             money=""
           />
           <StatComponent
-            value="450"
+            value={job.length}
             icon={<WorkIcon sx={{ color: "#fafafa", fontSize: 30 }} />}
             description="Jobs"
             money=""
           />
           <StatComponent
-            value="6548"
+            value={jobType.length}
             icon={<CategoryIcon sx={{ color: "#fafafa", fontSize: 30 }} />}
             description="Jobs categories"
             money=""
           />
         </Stack>
 
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          sx={{ mt: 3 }}
-          spacing={{ xs: 1, sm: 2, md: 4 }}
-        >
-          <ChartComponent>
-            <Chart
-              chartType="Bar"
-              data={data}
-              options={options}
-              width="100%"
-              height="300px"
-              legendToggle
-            />
-          </ChartComponent>
-        </Stack>
+        
       </Box>
     </>
   );

@@ -55,7 +55,6 @@ export const userSignUpAction = (user) => async (dispatch) => {
     const { data } = await axios.post(`http://localhost:8000/api/signup`, user,{
       withCredentials: true,
     });
-    localStorage.setItem("userData", JSON.stringify(data));
 
     dispatch({
       type: USER_SIGNUP_SUCCESS,

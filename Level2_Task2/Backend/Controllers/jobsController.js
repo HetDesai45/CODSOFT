@@ -46,6 +46,18 @@ exports.updatejob = async (req,res,next) =>{
   }
 }
 
+exports.deleteJob = async (req, res, next) => {
+  try {
+      const Job = await job.findByIdAndDelete(req.params.job_id);
+      res.status(200).json({
+          success: true,
+          message: "job deleted."
+      })
+  } catch (error) {
+      next(error);
+  }
+}
+
 exports.showjob = async (req,res,next) =>{
 
   const keyword = req.query.keyword?{

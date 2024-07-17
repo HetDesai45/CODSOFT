@@ -4,7 +4,7 @@ import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
-import { adminJobLoadAction } from "../../Redux/actions/jobAction";
+import { adminJobLoadAction, deleteSingleJobAction } from "../../Redux/actions/jobAction";
 
 const DashJobs = () => {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ const DashJobs = () => {
   let data = [];
   data = job !== undefined && job.length > 0 ? job : [];
 
-  //delete job by Id
+  
   const deleteJobById = (e, id) => {
-    console.log(id);
+    dispatch(deleteSingleJobAction(id));
   };
 
   const columns = [

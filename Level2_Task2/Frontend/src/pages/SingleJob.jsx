@@ -70,7 +70,6 @@ const SingleJob = () => {
                         : {singleJob && singleJob.location}
                       </Typography>
                       <Typography variant="body2" sx={{ pt: 2 }}>
-                        {/* <h3>Job description:</h3> */}
                         {singleJob && singleJob.description}
                       </Typography>
                     </CardContent>
