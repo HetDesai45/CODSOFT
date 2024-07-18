@@ -17,10 +17,10 @@ mongoose
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use(express.json());
 app.use(
@@ -30,7 +30,6 @@ app.use(
     credentials: true,
   })
 );
-
 
 app.use("/api", authRouter);
 app.use("/api", userRouter);
