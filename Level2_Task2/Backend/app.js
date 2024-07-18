@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://jobportal-frontend-ruby.vercel.app/",
+    origin: "https://codsoft-pxih.onrender.com",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
