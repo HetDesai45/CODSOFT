@@ -115,3 +115,5 @@ env.bak/
 .config
 .yardoc
 _byebug_history
+
+vercel.json

@@ -34,6 +34,10 @@ app.use("/api",userRouter);
 app.use("/api", jobTypeRouter);
 app.use("/api", jobRouter);
 
+app.get('/',(req,res)=>{
+  res.send("Hello")
+})
+
 const port = process.env.PORT || 8000;
 
 app.listen(port,()=>console.log(`Serrver Running ${port}`));
