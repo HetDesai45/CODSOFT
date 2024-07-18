@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://codsoft-pxih.onrender.com",
+    origin: "https://jobdront.onrender.com",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
