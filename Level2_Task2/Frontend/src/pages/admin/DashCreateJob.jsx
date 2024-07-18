@@ -7,7 +7,6 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { jobTypeLoadAction } from "../../Redux/actions/jobTypeAction";
 import { registerAjobAction } from "../../Redux/actions/jobAction";
-import { Navigate } from "react-router-dom";
 
 
 const validationSchema = yup.object({
@@ -23,7 +22,7 @@ const validationSchema = yup.object({
 
 const DashCreateJob = () => {
   const dispatch = useDispatch();
-  const navigate = Navigate();
+
   //job type
   useEffect(() => {
     dispatch(jobTypeLoadAction());
@@ -44,7 +43,6 @@ const DashCreateJob = () => {
       dispatch(registerAjobAction(values));
       // alert(JSON.stringify(values, null, 2));
       actions.resetForm();
-      navigate("/admin/jobs");
     },
   });
 
