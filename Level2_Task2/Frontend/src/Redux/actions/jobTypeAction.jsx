@@ -15,7 +15,9 @@ import { toast } from "react-toastify";
 export const jobTypeLoadAction = () => async (dispatch) => {
   dispatch({ type: JOB_TYPE_LOAD_REQUEST });
   try {
-    const { data } = await axios.get(`http://localhost:8000/api/type/jobs`);
+    const { data } = await axios.get(
+      `https://codsoft-pxih.onrender.com/api/type/jobs`
+    );
 
     localStorage.setItem("jobTypeInfo", JSON.stringify(data));
     dispatch({
@@ -38,7 +40,7 @@ export const createJobTypeAction = (jobtype) => async (dispatch) => {
 
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/type/create",
+      "https://codsoft-pxih.onrender.com/api/type/create",
       jobtype
     );
     dispatch({
@@ -59,7 +61,7 @@ export const deleteSingleJobTypeAction = (job_id) => async (dispatch) => {
   dispatch({ type: DELETE_JOB_TYPE_REQUEST });
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/type/delete/${job_id}`
+      `https://codsoft-pxih.onrender.com/api/type/delete/${job_id}`
     );
     dispatch({
       type: DELETE_JOB_TYPE_SUCCESS,

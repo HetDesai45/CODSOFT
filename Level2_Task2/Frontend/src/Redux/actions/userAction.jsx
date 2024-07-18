@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
-
   ALL_USER_LOAD_FAIL,
   ALL_USER_LOAD_REQUEST,
   ALL_USER_LOAD_SUCCESS,
@@ -24,15 +23,18 @@ import {
   USER_SIGNUP_SUCCESS,
 } from "../constants/userConstant";
 
-
-axios.defaults.withCredentials = true; 
+axios.defaults.withCredentials = true;
 
 export const userSignInAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
   try {
-    const { data } = await axios.post(`http://localhost:8000/api/signin`, user,{
-      withCredentials: true,
-    });
+    const { data } = await axios.post(
+      `https://codsoft-pxih.onrender.com/api/signin`,
+      user,
+      {
+        withCredentials: true,
+      }
+    );
     localStorage.setItem("userInfo", JSON.stringify(data));
 
     dispatch({
@@ -55,9 +57,13 @@ export const userSignInAction = (user) => async (dispatch) => {
 export const userSignUpAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNUP_REQUEST });
   try {
-    const { data } = await axios.post(`http://localhost:8000/api/signup`, user,{
-      withCredentials: true,
-    });
+    const { data } = await axios.post(
+      `https://codsoft-pxih.onrender.com/api/signup`,
+      user,
+      {
+        withCredentials: true,
+      }
+    );
 
     dispatch({
       type: USER_SIGNUP_SUCCESS,
@@ -79,7 +85,9 @@ export const userSignUpAction = (user) => async (dispatch) => {
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: USER_LOGOUT_REQUEST });
   try {
-    const { data } = await axios.get(`http://localhost:8000/api/logout`);
+    const { data } = await axios.get(
+      `https://codsoft-pxih.onrender.com/api/logout`
+    );
     localStorage.removeItem("userInfo");
 
     dispatch({
@@ -102,7 +110,9 @@ export const userLogoutAction = () => async (dispatch) => {
 export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOADING_REQUEST });
   try {
-    const { data } = await axios.get(`http://localhost:8000/api/me`);
+    const { data } = await axios.get(
+      `https://codsoft-pxih.onrender.com/api/me`
+    );
 
     dispatch({
       type: USER_LOADING_SUCCESS,
@@ -122,53 +132,59 @@ export const userProfileAction = () => async (dispatch) => {
 export const userApplyJobAction = (job) => async (dispatch) => {
   dispatch({ type: USER_APPLY_JOB_REQUEST });
   try {
-      const { data } = await axios.post("http://localhost:8000/api/user/jobhistory", job);
+    const { data } = await axios.post(
+      "https://codsoft-pxih.onrender.com/api/user/jobhistory",
+      job
+    );
 
-      dispatch({
-          type: USER_APPLY_JOB_SUCCESS,
-          payload: data
-      });
-      toast.success("Apply Successfully for this Job!");
+    dispatch({
+      type: USER_APPLY_JOB_SUCCESS,
+      payload: data,
+    });
+    toast.success("Apply Successfully for this Job!");
   } catch (error) {
-      dispatch({
-          type: USER_APPLY_JOB_FAIL,
-          payload: error.response.data.error
-      });
-      toast.error(error.response.data.error);
+    dispatch({
+      type: USER_APPLY_JOB_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
   }
-}
+};
 
 export const allUserAction = () => async (dispatch) => {
   dispatch({ type: ALL_USER_LOAD_REQUEST });
   try {
-      const { data } = await axios.get("http://localhost:8000/api/allusers");
-      dispatch({
-          type: ALL_USER_LOAD_SUCCESS,
-          payload: data
-      });
-
+    const { data } = await axios.get(
+      "https://codsoft-pxih.onrender.com/api/allusers"
+    );
+    dispatch({
+      type: ALL_USER_LOAD_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-      dispatch({
-          type: ALL_USER_LOAD_FAIL,
-          payload: error.response.data.error
-      });
+    dispatch({
+      type: ALL_USER_LOAD_FAIL,
+      payload: error.response.data.error,
+    });
   }
-}
+};
 
 export const deleteUserAction = (user_id) => async (dispatch) => {
   dispatch({ type: DELETE_USER_REQUEST });
   try {
-      const { data } = await axios.delete(`http://localhost:8000/api/user/delete/${user_id}`);
-      dispatch({
-          type: DELETE_USER_SUCCESS,
-          payload: data
-      });
-      toast.success("User deleted successfully");
+    const { data } = await axios.delete(
+      `https://codsoft-pxih.onrender.com/api/user/delete/${user_id}`
+    );
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: data,
+    });
+    toast.success("User deleted successfully");
   } catch (error) {
-      dispatch({
-          type: DELETE_USER_FAIL,
-          payload: error.response.data.error
-      });
-      toast.error(error.response.data.error);
+    dispatch({
+      type: DELETE_USER_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
   }
-}
+};

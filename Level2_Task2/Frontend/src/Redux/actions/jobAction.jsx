@@ -27,7 +27,7 @@ export const jobLoadAction =
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
       const { data } = await axios.get(
-        `http://localhost:8000/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
+        `https://codsoft-pxih.onrender.com/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
       );
       dispatch({
         type: JOB_LOAD_SUCCESS,
@@ -47,7 +47,9 @@ export const jobLoadAction =
 export const jobLoadSingleAction = (id) => async (dispatch) => {
   dispatch({ type: JOB_LOAD_SINGLE_REQUEST });
   try {
-    const { data } = await axios.get(`http://localhost:8000/api/job/${id}`);
+    const { data } = await axios.get(
+      `https://codsoft-pxih.onrender.com/api/job/${id}`
+    );
     dispatch({
       type: JOB_LOAD_SINGLE_SUCCESS,
       payload: data,
@@ -66,7 +68,7 @@ export const adminJobLoadAction =
     dispatch({ type: ALLJOB_LOAD_REQUEST });
     try {
       const { data } = await axios.get(
-        `http://localhost:8000/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
+        `https://codsoft-pxih.onrender.com/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
       );
       dispatch({
         type: ALLJOB_LOAD_SUCCESS,
@@ -83,60 +85,66 @@ export const adminJobLoadAction =
     }
   };
 
-  export const deleteSingleJobAction = (job_id) => async (dispatch) => {
-    dispatch({ type: DELETE_JOB_REQUEST });
-    try {
-        const { data } = await axios.delete(`http://localhost:8000/api/job/delete/${job_id}`);
-        dispatch({
-            type: DELETE_JOB_SUCCESS,
-            payload: data
-        });
-        toast.success("Job deleted successfully");
-    } catch (error) {
-        dispatch({
-            type: DELETE_JOB_FAIL,
-            payload: error.response.data.error
-        });
-        toast.error(error.response.data.error);
-    }
-}
-
+export const deleteSingleJobAction = (job_id) => async (dispatch) => {
+  dispatch({ type: DELETE_JOB_REQUEST });
+  try {
+    const { data } = await axios.delete(
+      `https://codsoft-pxih.onrender.com/api/job/delete/${job_id}`
+    );
+    dispatch({
+      type: DELETE_JOB_SUCCESS,
+      payload: data,
+    });
+    toast.success("Job deleted successfully");
+  } catch (error) {
+    dispatch({
+      type: DELETE_JOB_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
+  }
+};
 
 //edit single job action
 export const editSingleJobAction = (job) => async (dispatch) => {
-    dispatch({ type: EDIT_JOB_REQUEST });
-    try {
-        const { data } = await axios.put(`http://localhost:8000/api/job/update/${job._id}`, job);
-        dispatch({
-            type: EDIT_JOB_SUCCESS,
-            payload: data
-        });
-        toast.success("Job updated successfully");
-    } catch (error) {
-        dispatch({
-            type: EDIT_JOB_FAIL,
-            payload: error.response.data.error
-        });
-        toast.error(error.response.data.error);
-    }
-}
+  dispatch({ type: EDIT_JOB_REQUEST });
+  try {
+    const { data } = await axios.put(
+      `https://codsoft-pxih.onrender.com/api/job/update/${job._id}`,
+      job
+    );
+    dispatch({
+      type: EDIT_JOB_SUCCESS,
+      payload: data,
+    });
+    toast.success("Job updated successfully");
+  } catch (error) {
+    dispatch({
+      type: EDIT_JOB_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
+  }
+};
 
 export const registerAjobAction = (job) => async (dispatch) => {
-    dispatch({ type: REGISTER_JOB_REQUEST })
+  dispatch({ type: REGISTER_JOB_REQUEST });
 
-    try {
-        const { data } = await axios.post("http://localhost:8000/api/job/create", job)
-        dispatch({
-            type: REGISTER_JOB_SUCCESS,
-            payload: data
-        })
-        toast.success("Job created successfully");
-
-    } catch (error) {
-        dispatch({
-            type: REGISTER_JOB_FAIL,
-            payload: error.response.data.error
-        })
-        toast.error(error.response.data.error);
-    }
-}
+  try {
+    const { data } = await axios.post(
+      "https://codsoft-pxih.onrender.com/api/job/create",
+      job
+    );
+    dispatch({
+      type: REGISTER_JOB_SUCCESS,
+      payload: data,
+    });
+    toast.success("Job created successfully");
+  } catch (error) {
+    dispatch({
+      type: REGISTER_JOB_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
+  }
+};
