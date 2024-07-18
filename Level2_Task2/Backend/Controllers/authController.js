@@ -45,8 +45,7 @@ exports.signin = async (req, res, next) => {
 };
 
 const sendTokenResponse = async (user, codeStatus, res) => {
-  const token = await userLogin.generateAuthToken();
-
+  const token = await user.getJwtToken();
   res
     .status(codeStatus)
     .cookie("token", token, {
