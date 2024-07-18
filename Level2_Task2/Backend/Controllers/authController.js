@@ -24,7 +24,7 @@ exports.signin = async (req, res, next) => {
     if (!email) {
       return next(new ErrorResponse("Please Enter an Email", 403));
     }
-    if (!email) {
+    if (!password) {
       return next(new ErrorResponse("Please Enter a Password", 403));
     }
 
@@ -46,14 +46,15 @@ exports.signin = async (req, res, next) => {
 
 const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
-  const options = {
-    expires: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
-    httpOnly: true,
-  };
   res
     .status(codeStatus)
-    .cookie("token", token, options)
-    .json({ success: true,role: user.role, user});
+    .cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 3600000,
+    })
+    .json({ success: true, role: user.role, user });
 };
 
 exports.logout = (req, res, next) => {
