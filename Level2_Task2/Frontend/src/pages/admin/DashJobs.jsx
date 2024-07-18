@@ -92,7 +92,7 @@ const DashJobs = () => {
             style={{ color: "white", textDecoration: "none" }}
             to="/admin/job/create"
           >
-            Create Job
+            Post A Job
           </Link>
         </Button>
       </Box>

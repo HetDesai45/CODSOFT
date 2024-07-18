@@ -3,6 +3,10 @@ import {
   ALL_USER_LOAD_REQUEST,
   ALL_USER_LOAD_RESET,
   ALL_USER_LOAD_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_RESET,
+  DELETE_USER_SUCCESS,
   USER_APPLY_JOB_FAIL,
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_RESET,
@@ -175,4 +179,26 @@ export const allUserReducer = (state = { users: [] }, action) => {
           return state;
   }
 
+}
+
+export const deleteUserReducer = (state = {}, action) => {
+  switch (action.type) {
+      case DELETE_USER_REQUEST:
+          return { loading: true }
+      case DELETE_USER_SUCCESS:
+          return {
+              loading: false,
+              success: action.payload.success,
+              message: action.payload.message
+          }
+      case DELETE_USER_FAIL:
+          return {
+              loading: false,
+              error: action.payload
+          }
+      case DELETE_USER_RESET:
+          return {}
+      default:
+          return state;
+  }
 }

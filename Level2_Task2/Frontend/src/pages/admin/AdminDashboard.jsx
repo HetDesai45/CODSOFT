@@ -30,7 +30,7 @@ const AdminDashboard = () => {
     <>
       <Box>
         <Typography variant="h4" sx={{ color: "white", pb: 3 }}>
-          Dashboard
+          Employer Dashboard
         </Typography>
         <Stack
           direction={{ xs: "column", sm: "row" }}

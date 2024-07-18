@@ -4,7 +4,7 @@ import {thunk} from 'redux-thunk';
 import {composeWithDevTools} from '@redux-devtools/extension';
 import { deleteJobReducer, loadAdminJobReducer, loadJobReducer, loadJobSingleReducer, registerAjobReducer, updateJobReducer } from './reducers/jobReducer';
 import { createJobTypeReducer, deleteJobTypeReducer, loadJobTypeReducer } from './reducers/jobTypeReducer';
-import { allUserReducer, userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn, userReducerSignUp } from './reducers/userReducer';
+import { allUserReducer, deleteUserReducer, userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn, userReducerSignUp } from './reducers/userReducer';
 
 const reducer1 = combineReducers({
   loadjob: loadJobReducer,
@@ -21,7 +21,8 @@ const reducer1 = combineReducers({
   deleteJob: deleteJobReducer,
   deleteJobType: deleteJobTypeReducer,
   createJobType: createJobTypeReducer,
-  updateJob: updateJobReducer
+  updateJob: updateJobReducer,
+  deleteUser: deleteUserReducer
 })
 
 const middleware = [thunk];

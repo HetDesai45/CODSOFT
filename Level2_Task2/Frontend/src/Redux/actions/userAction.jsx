@@ -5,6 +5,9 @@ import {
   ALL_USER_LOAD_FAIL,
   ALL_USER_LOAD_REQUEST,
   ALL_USER_LOAD_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
   USER_APPLY_JOB_FAIL,
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_SUCCESS,
@@ -149,5 +152,23 @@ export const allUserAction = () => async (dispatch) => {
           type: ALL_USER_LOAD_FAIL,
           payload: error.response.data.error
       });
+  }
+}
+
+export const deleteUserAction = (user_id) => async (dispatch) => {
+  dispatch({ type: DELETE_USER_REQUEST });
+  try {
+      const { data } = await axios.delete(`http://localhost:8000/api/user/delete/${user_id}`);
+      dispatch({
+          type: DELETE_USER_SUCCESS,
+          payload: data
+      });
+      toast.success("User deleted successfully");
+  } catch (error) {
+      dispatch({
+          type: DELETE_USER_FAIL,
+          payload: error.response.data.error
+      });
+      toast.error(error.response.data.error);
   }
 }

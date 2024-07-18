@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { allUserAction } from "../../Redux/actions/userAction";
+import { allUserAction, deleteUserAction } from "../../Redux/actions/userAction";
 
 
 const DashUsers = () => {
@@ -20,7 +20,7 @@ const DashUsers = () => {
   data = users !== undefined && users.length > 0 ? users : [];
 
   const deleteUserById = (e, id) => {
-    console.log(id);
+    dispatch(deleteUserAction(id));
   };
 
   const columns = [
@@ -64,14 +64,6 @@ const DashUsers = () => {
             width: "170px",
           }}
         >
-          <Button variant="contained">
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to={`/admin/edit/user/${values.row._id}`}
-            >
-              Edit
-            </Link>
-          </Button>
           <Button
             onClick={(e) => deleteUserById(e, values.row._id)}
             variant="contained"
