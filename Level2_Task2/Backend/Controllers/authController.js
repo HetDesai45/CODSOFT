@@ -65,7 +65,7 @@ exports.logout = (req, res, next) => {
 };
 
 exports.userProfile = async (req, res, next) => {
-  const user = await User.findById(req.user.id).select("-password");
+  const user = await User.findById(req.user.id).select("-password"); //aa id auth middleware mathi ave 6
   res.status(200).json({
     success: true,
     user,
