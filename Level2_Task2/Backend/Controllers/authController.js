@@ -45,16 +45,17 @@ exports.signin = async (req, res, next) => {
 };
 
 const sendTokenResponse = async (user, codeStatus, res) => {
-  const token = await user.getJwtToken();
+  const token = await userLogin.generateAuthToken();
+
   res
     .status(codeStatus)
     .cookie("token", token, {
+      expires: new Date(Date.now() + 25892000000), // after 30 days
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-      maxAge: 3600000,
     })
     .json({ success: true, role: user.role, user });
+
+  console.log(token);
 };
 
 exports.logout = (req, res, next) => {
