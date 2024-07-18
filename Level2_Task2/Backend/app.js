@@ -31,7 +31,7 @@ app.use(
   })
 );
 
-app.use(errorHandler);
+
 app.use("/api", authRouter);
 app.use("/api", userRouter);
 app.use("/api", jobTypeRouter);
@@ -43,4 +43,5 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 8000;
 
+app.use(errorHandler);
 app.listen(port, () => console.log(`Serrver Running ${port}`));
