@@ -10,34 +10,37 @@ const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
 const jobTypeRouter = require("./routes/jobTypeRoutes");
 const jobRouter = require("./routes/jobsRoutes");
-const cors = require('cors');
+const cors = require("cors");
 
-mongoose.connect(process.env.DATABASE)
-.then(()=>console.log("Database connected"))
-.catch((err)=>console.log(err));
+mongoose
+  .connect(process.env.DATABASE)
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.log(err));
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["POST", "GET"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "https://jobportal-frontend-ruby.vercel.app/",
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(errorHandler);
-app.use("/api",authRouter);
-app.use("/api",userRouter);
+app.use("/api", authRouter);
+app.use("/api", userRouter);
 app.use("/api", jobTypeRouter);
 app.use("/api", jobRouter);
 
-app.get('/',(req,res)=>{
-  res.send("Hello")
-})
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 const port = process.env.PORT || 8000;
 
-app.listen(port,()=>console.log(`Serrver Running ${port}`));
+app.listen(port, () => console.log(`Serrver Running ${port}`));
