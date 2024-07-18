@@ -52,7 +52,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   };
   res
     .status(codeStatus)
-    .cookie("access_token", token, options)
+    .cookie("token", token, options)
     .json({ success: true,role: user.role, user});
 };
 

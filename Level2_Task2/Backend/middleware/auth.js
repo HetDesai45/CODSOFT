@@ -1,20 +1,20 @@
 const ErrorResponse = require("../utils/errorResponse");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 require("dotenv").config();
 
 exports.isAuthenticated = async (req, res, next) => {
-  const { access_token } = req.cookies;
+  const { token } = req.cookies;
 
   console.log(token);
   // Make sure token exists
-  if (!access_token) {
+  if (!token) {
     return next(new ErrorResponse("Token not found in cookies", 401));
   }
 
   try {
     // Verify token
-    const decoded = jwt.verify(access_token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log("Decoded token:", decoded);
 
     // Find user by ID from decoded token
