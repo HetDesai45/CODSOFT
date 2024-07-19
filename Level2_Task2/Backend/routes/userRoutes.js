@@ -9,8 +9,8 @@ router.get("/", (req, res) => {
 
 
 router.get("/allusers", isAdmin, allUsers);
-router.get("/user/:id", isAuthenticated, singleUser);
+router.get("/user/:id", singleUser);
 router.put("/user/edit/:id", editUser);
-router.delete("/user/delete/:id", isAuthenticated, isAdmin, deleteUser);
-router.post("/user/jobhistory", isAuthenticated, createUserJobHistory);
+router.delete("/user/delete/:id", isAdmin, deleteUser);
+router.post("/user/jobhistory", createUserJobHistory);
 module.exports = router;
