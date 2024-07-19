@@ -7,7 +7,7 @@ exports.isAuthenticated = async (req, res, next) => {
   const token = req.cookies.token;
 
   console.log(token);
-  // Make sure token exists
+  
   if (token == null) {
     return next(new ErrorResponse("Token not found in cookies", 401));
   }
