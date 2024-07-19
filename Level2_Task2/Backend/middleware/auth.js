@@ -4,18 +4,14 @@ const User = require("../models/userModel");
 require("dotenv").config();
 
 exports.isAuthenticated = async (req, res, next) => {
-  const token = req.cookies.token;
+  const {token} = req.cookies;
 
-  console.log(token);
-  
-  if (token == null) {
+
+  if (token === null) {
     return next(new ErrorResponse("Token not found in cookies", 401));
   }
-  // Verify token
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  console.log("Decoded token:", decoded);
 
-  // Find user by ID from decoded token
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.user = await User.findById(decoded.id);
 
   if (!req.user) {
