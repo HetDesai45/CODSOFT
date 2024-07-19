@@ -111,7 +111,9 @@ export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOADING_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://codsoft-pxih.onrender.com/api/me`
+      `https://codsoft-pxih.onrender.com/api/me`,{
+        withCredentials: true
+      }
     );
 
     dispatch({
