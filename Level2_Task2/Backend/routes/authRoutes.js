@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { signup, signin, logout, userProfile } = require("../Controllers/authController");
-const { isAuthenticated } = require("../middleware/auth");
+// const { isAuthenticated } = require("../middleware/auth");
 
 router.get("/", (req, res) => {
   res.send("Hello");

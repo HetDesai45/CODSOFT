@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuthenticated, isAdmin } = require("../middleware/auth");
+const {  isAdmin } = require("../middleware/auth");
 const {
   createJob,
   signlejob,
