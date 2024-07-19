@@ -7,17 +7,23 @@ exports.isAuthenticated = async (req, res, next) => {
   const {token} = req.cookies;
 
 
-  if (token === null) {
+  if (!token) {
     return next(new ErrorResponse("Token not found in cookies", 401));
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  req.user = await User.findById(decoded.id);
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id);
 
-  if (!req.user) {
-    return next(new ErrorResponse("User not found", 404));
+    if (!req.user) {
+      return next(new ErrorResponse("User not found", 404));
+    }
+    next();
+    
+  } catch (error) {
+    console.error("Token verification failed:", error.message);
+    return next(new ErrorResponse("Not authorized to access this route", 401));
   }
-  next();
 };
 
 exports.isAdmin = (req, res, next) => {
