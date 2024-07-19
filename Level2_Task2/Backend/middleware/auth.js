@@ -41,24 +41,24 @@ require("dotenv").config();
 //   };
 // }
 
-function isAuthenticated(cookieName) {
-  return (req, res, next) => {
-    const token = req.cookies[cookieName];
-    console.log("token", token)
-    if (!token){
-      console.log("token not generated")
-      return next();
-    }
-    console.log(process.env.JWT_SECRET);
-    try {
-      const userPayload = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = userPayload;
-    } catch (error) {
-      console.log(error);
-    }
-    return next();
-  };
+const isAuthenticated = async (req, res, next) => {
+  const { token } = req.cookies;
+  // Make sure token exists
+  if (!token) {
+      return next(new ErrorResponse('You must log in!', 401));
+  }
+
+  try {
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id);
+      next();
+
+  } catch (error) {
+      return next(new ErrorResponse('You must log in!', 401));
+  }
 }
+
 const isAdmin = (req, res, next) => {
   if (req.user.role === 0) {
     return next(new ErrorResponse("Access Denied", 401));
