@@ -48,13 +48,12 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
   res
     .status(codeStatus)
-    .cookie("token", token, {
-      expires: new Date(Date.now() + 25892000000), // after 30 days
-      httpOnly: true,
-    })
-    .json({ success: true, role: user.role, user });
-
-  console.log(token);
+    .cookie("token", token, { maxAge: 60 * 60 * 1000, httpOnly: true })
+    .json({
+      success: true,
+      role: user.role,
+      user,
+    });
 };
 
 exports.logout = (req, res, next) => {

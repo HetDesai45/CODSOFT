@@ -4,25 +4,20 @@ const User = require("../models/userModel");
 require("dotenv").config();
 
 exports.isAuthenticated = async (req, res, next) => {
-  const {token} = req.cookies;
-
-
+  const { token } = req.cookies;
+  // Make sure token exists
   if (!token) {
-    return next(new ErrorResponse("Token not found in cookies", 401));
+      return next(new ErrorResponse('You must log in!', 401));
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.id);
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id);
+      next();
 
-    if (!req.user) {
-      return next(new ErrorResponse("User not found", 404));
-    }
-    next();
-    
   } catch (error) {
-    console.error("Token verification failed:", error.message);
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+      return next(new ErrorResponse('You must log in!', 401));
   }
 };
 
