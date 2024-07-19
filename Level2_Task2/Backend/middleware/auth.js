@@ -8,27 +8,20 @@ exports.isAuthenticated = async (req, res, next) => {
 
   console.log(token);
   // Make sure token exists
-  if (!token) {
+  if (token == null) {
     return next(new ErrorResponse("Token not found in cookies", 401));
   }
+  // Verify token
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  console.log("Decoded token:", decoded);
 
-  try {
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded);
+  // Find user by ID from decoded token
+  req.user = await User.findById(decoded.id);
 
-    // Find user by ID from decoded token
-    req.user = await User.findById(decoded.id);
-
-    if (!req.user) {
-      return next(new ErrorResponse("User not found", 404));
-    }
-
-    next();
-  } catch (error) {
-    console.error("Token verification failed:", error.message);
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+  if (!req.user) {
+    return next(new ErrorResponse("User not found", 404));
   }
+  next();
 };
 
 exports.isAdmin = (req, res, next) => {
