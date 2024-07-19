@@ -157,7 +157,9 @@ export const allUserAction = () => async (dispatch) => {
   dispatch({ type: ALL_USER_LOAD_REQUEST });
   try {
     const { data } = await axios.get(
-      "https://codsoft-pxih.onrender.com/api/allusers"
+      "https://codsoft-pxih.onrender.com/api/allusers",{
+        withCredentials: true
+      }
     );
     dispatch({
       type: ALL_USER_LOAD_SUCCESS,
