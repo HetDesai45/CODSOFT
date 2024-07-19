@@ -18,13 +18,7 @@ mongoose
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
-app.use(
-  cors({
-    origin: "https://jobdront.onrender.com",
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
