@@ -26,11 +26,26 @@ require("dotenv").config();
 //   }
 // };
 
-function checkForAuthentication(cookieName) {
+// function checkForAuthentication(cookieName) {
+//   return (req, res, next) => {
+//     const token = req.cookies[cookieName];
+//     if (!token) return next();
+//     console.log(process.env.JWT_SECRET);
+//     try {
+//       const userPayload = jwt.verify(token, process.env.JWT_SECRET);
+//       req.user = userPayload;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//     return next();
+//   };
+// }
+
+function isAuthenticated(cookieName) {
   return (req, res, next) => {
     const token = req.cookies[cookieName];
     if (!token) return next();
-
+    console.log(process.env.JWT_SECRET);
     try {
       const userPayload = jwt.verify(token, process.env.JWT_SECRET);
       req.user = userPayload;
@@ -40,7 +55,6 @@ function checkForAuthentication(cookieName) {
     return next();
   };
 }
-
 const isAdmin = (req, res, next) => {
   if (req.user.role === 0) {
     return next(new ErrorResponse("Access Denied", 401));
@@ -49,6 +63,6 @@ const isAdmin = (req, res, next) => {
 };
 
 module.exports = {
-  checkForAuthentication,
+  isAuthenticated,
   isAdmin,
 };
