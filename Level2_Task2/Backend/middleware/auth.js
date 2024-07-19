@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 require("dotenv").config();
 
-exports.isAuthenticated = async (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
   console.log(req.cookies)
   const token = req.cookies.token;
   console.log("usertoken",token)
@@ -26,9 +26,14 @@ exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
-exports.isAdmin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
   if (req.user.role === 0) {
     return next(new ErrorResponse("Access Denied", 401));
   }
   next();
 };
+
+module.exports = {
+  isAuthenticated,
+  isAdmin
+}
