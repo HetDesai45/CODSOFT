@@ -47,6 +47,7 @@ exports.signin = async (req, res, next) => {
 const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
   return res
+    .setHeader("Access-Control-Allow-Credentials", true)
     .status(codeStatus)
     .cookie("token", token, {
       httpOnly: true,
