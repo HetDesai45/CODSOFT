@@ -44,7 +44,11 @@ require("dotenv").config();
 function isAuthenticated(cookieName) {
   return (req, res, next) => {
     const token = req.cookies[cookieName];
-    if (!token) return next();
+    console.log("token", token)
+    if (!token){
+      console.log("token not generated")
+      return next();
+    }
     console.log(process.env.JWT_SECRET);
     try {
       const userPayload = jwt.verify(token, process.env.JWT_SECRET);
