@@ -11,19 +11,13 @@ const userRouter = require("./routes/userRoutes");
 const jobTypeRouter = require("./routes/jobTypeRoutes");
 const jobRouter = require("./routes/jobsRoutes");
 const cors = require("cors");
-const {checkForAuthentication} = require('./middleware/auth')
+const { checkForAuthentication } = require("./middleware/auth");
 
 mongoose
   .connect(process.env.DATABASE)
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
-app.use(cookieParser());
-app.use(morgan("dev"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(checkForAuthentication('token'))
-app.use(express.json());
 app.use(
   cors({
     origin: "https://jobdront.onrender.com",
@@ -31,6 +25,12 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
+app.use(morgan("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(checkForAuthentication("token"));
+app.use(express.json());
 
 app.use("/api", authRouter);
 app.use("/api", userRouter);
