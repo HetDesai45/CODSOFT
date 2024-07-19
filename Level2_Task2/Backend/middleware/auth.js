@@ -43,8 +43,10 @@ require("dotenv").config();
 
 const isAuthenticated = async (req, res, next) => {
   const { token } = req.cookies;
+  console.log("token", token)
   // Make sure token exists
   if (!token) {
+    console.log("Token not difined")
       return next(new ErrorResponse('You must log in!', 401));
   }
 
