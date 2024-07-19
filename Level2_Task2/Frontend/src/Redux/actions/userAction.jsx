@@ -115,7 +115,7 @@ export const userProfileAction = () => async (dispatch) => {
         withCredentials: true
       }
     );
-
+    console.log(data);
     dispatch({
       type: USER_LOADING_SUCCESS,
       payload: data,
