@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 require("dotenv").config();
 
 exports.isAuthenticated = async (req, res, next) => {
+  console.log(req.cookies)
   const token = req.cookies.token;
   console.log("usertoken",token)
   // Make sure token exists

@@ -49,14 +49,13 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   return res
     .status(codeStatus)
     .cookie("token", token, {
-      maxAge: 60 * 60 * 1000,
-      httpOnly: true
+      httpOnly: true,
     })
     .json({
       success: true,
       role: user.role,
       user,
-      token
+      token,
     });
 };
 
