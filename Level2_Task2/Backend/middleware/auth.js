@@ -5,6 +5,7 @@ require("dotenv").config();
 
 exports.isAuthenticated = async (req, res, next) => {
   const { token } = req.cookies;
+  console.log(token)
   // Make sure token exists
   if (!token) {
       return next(new ErrorResponse('You must log in!', 401));
@@ -14,9 +15,11 @@ exports.isAuthenticated = async (req, res, next) => {
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.id);
+      console.log(decoded)
       next();
 
   } catch (error) {
+      console.log("error",error)
       return next(new ErrorResponse('You must log in!', 401));
   }
 };
