@@ -60,6 +60,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
       success: true,
       role: user.role,
       user,
+      token
     });
 };
 
