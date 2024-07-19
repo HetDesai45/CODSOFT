@@ -111,8 +111,9 @@ export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOADING_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://codsoft-pxih.onrender.com/api/me`,{
-        withCredentials: true
+      `https://codsoft-pxih.onrender.com/api/me`,
+      {
+        withCredentials: true,
       }
     );
     console.log(data);
@@ -157,8 +158,9 @@ export const allUserAction = () => async (dispatch) => {
   dispatch({ type: ALL_USER_LOAD_REQUEST });
   try {
     const { data } = await axios.get(
-      "https://codsoft-pxih.onrender.com/api/allusers",{
-        withCredentials: true
+      "https://codsoft-pxih.onrender.com/api/allusers",
+      {
+        withCredentials: true,
       }
     );
     dispatch({
