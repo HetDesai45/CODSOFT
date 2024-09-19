@@ -9,10 +9,10 @@ const {
 } = require("../Controllers/jobsController");
 const router = express.Router();
 
-router.post("/job/create", isAdmin, createJob);
+router.post("/job/create", isAuthenticated, isAdmin, createJob);
 router.get("/job/:id", signlejob);
-router.put("/job/update/:job_id", isAdmin, updatejob);
-router.delete("/job/delete/:job_id", isAdmin, deleteJob);
+router.put("/job/update/:job_id", isAuthenticated, isAdmin, updatejob);
+router.delete("/job/delete/:job_id", isAuthenticated, isAdmin, deleteJob);
 router.get("/jobs/show", showjob);
 
 module.exports = router;

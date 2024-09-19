@@ -21,13 +21,15 @@ import {
 } from "../constants/jobconstant";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 export const jobLoadAction =
   (pageNumber, keyword = "", cat = "", location = "") =>
   async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
       const { data } = await axios.get(
-        `https://codsoft-pxih.onrender.com/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
+        `http://localhost:8000/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
       );
       dispatch({
         type: JOB_LOAD_SUCCESS,
@@ -48,7 +50,7 @@ export const jobLoadSingleAction = (id) => async (dispatch) => {
   dispatch({ type: JOB_LOAD_SINGLE_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://codsoft-pxih.onrender.com/api/job/${id}`
+      `http://localhost:8000/api/job/${id}`
     );
     dispatch({
       type: JOB_LOAD_SINGLE_SUCCESS,
@@ -68,7 +70,7 @@ export const adminJobLoadAction =
     dispatch({ type: ALLJOB_LOAD_REQUEST });
     try {
       const { data } = await axios.get(
-        `https://codsoft-pxih.onrender.com/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
+        `http://localhost:8000/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`
       );
       dispatch({
         type: ALLJOB_LOAD_SUCCESS,
@@ -89,7 +91,7 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
   dispatch({ type: DELETE_JOB_REQUEST });
   try {
     const { data } = await axios.delete(
-      `https://codsoft-pxih.onrender.com/api/job/delete/${job_id}`
+      `http://localhost:8000/api/job/delete/${job_id}`
     );
     dispatch({
       type: DELETE_JOB_SUCCESS,
@@ -110,7 +112,7 @@ export const editSingleJobAction = (job) => async (dispatch) => {
   dispatch({ type: EDIT_JOB_REQUEST });
   try {
     const { data } = await axios.put(
-      `https://codsoft-pxih.onrender.com/api/job/update/${job._id}`,
+      `http://localhost:8000/api/job/update/${job._id}`,
       job
     );
     dispatch({
@@ -132,7 +134,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
 
   try {
     const { data } = await axios.post(
-      "https://codsoft-pxih.onrender.com/api/job/create",
+      "http://localhost:8000/api/job/create",
       job
     );
     dispatch({

@@ -1,16 +1,16 @@
 import {
-  CREATE_JOB_TYPE_FAIL,
-  CREATE_JOB_TYPE_REQUEST,
-  CREATE_JOB_TYPE_RESET,
-  CREATE_JOB_TYPE_SUCCESS,
-  DELETE_JOB_TYPE_FAIL,
-  DELETE_JOB_TYPE_REQUEST,
-  DELETE_JOB_TYPE_RESET,
-  DELETE_JOB_TYPE_SUCCESS,
-  JOB_TYPE_LOAD_FAIL,
-  JOB_TYPE_LOAD_REQUEST,
-  JOB_TYPE_LOAD_RESET,
-  JOB_TYPE_LOAD_SUCCESS,
+  CREATE_JOBTYPE_FAIL,
+  CREATE_JOBTYPE_REQUEST,
+  CREATE_JOBTYPE_RESET,
+  CREATE_JOBTYPE_SUCCESS,
+  DELETE_JOBTYPE_FAIL,
+  DELETE_JOBTYPE_REQUEST,
+  DELETE_JOBTYPE_RESET,
+  DELETE_JOBTYPE_SUCCESS,
+  JOBTYPE_LOAD_FAIL,
+  JOBTYPE_LOAD_REQUEST,
+  JOBTYPE_LOAD_RESET,
+  JOBTYPE_LOAD_SUCCESS,
 } from "../constants/jobTypeConstant";
 
 const initialState = {
@@ -24,21 +24,21 @@ const initialState = {
 
 export const loadJobTypeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case JOB_TYPE_LOAD_REQUEST:
+    case JOBTYPE_LOAD_REQUEST:
       return { ...state, loading: true };
-    case JOB_TYPE_LOAD_SUCCESS:
+    case JOBTYPE_LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
         jobType: action.payload.jobt,
       };
-    case JOB_TYPE_LOAD_FAIL:
+    case JOBTYPE_LOAD_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case JOB_TYPE_LOAD_RESET:
+    case JOBTYPE_LOAD_RESET:
       return {};
     default:
       return state;
@@ -47,16 +47,16 @@ export const loadJobTypeReducer = (state = initialState, action) => {
 
 export const createJobTypeReducer = (state = {}, action) => {
   switch (action.type) {
-    case CREATE_JOB_TYPE_REQUEST:
+    case CREATE_JOBTYPE_REQUEST:
       return { loading: true };
-    case CREATE_JOB_TYPE_SUCCESS:
+    case CREATE_JOBTYPE_SUCCESS:
       return {
         loading: false,
         jobType: action.payload,
       };
-    case CREATE_JOB_TYPE_FAIL:
+    case CREATE_JOBTYPE_FAIL:
       return { loading: false, error: action.payload };
-    case CREATE_JOB_TYPE_RESET:
+    case CREATE_JOBTYPE_RESET:
       return {};
     default:
       return state;
@@ -65,20 +65,20 @@ export const createJobTypeReducer = (state = {}, action) => {
 
 export const deleteJobTypeReducer = (state = {}, action) => {
   switch (action.type) {
-    case DELETE_JOB_TYPE_REQUEST:
+    case DELETE_JOBTYPE_REQUEST:
       return { loading: true };
-    case DELETE_JOB_TYPE_SUCCESS:
+    case DELETE_JOBTYPE_SUCCESS:
       return {
         loading: false,
         success: action.payload.success,
         message: action.payload.message,
       };
-    case DELETE_JOB_TYPE_FAIL:
+    case DELETE_JOBTYPE_FAIL:
       return {
         loading: false,
         error: action.payload,
       };
-    case DELETE_JOB_TYPE_RESET:
+    case DELETE_JOBTYPE_RESET:
       return {};
     default:
       return state;

@@ -1,11 +1,11 @@
 const express = require('express');
-const {  isAdmin } = require('../middleware/auth');
+const {  isAdmin, isAuthenticated } = require('../middleware/auth');
 const { createJobType, allJobsType, updateJobType, deleteJobType } = require('../Controllers/jobTypeController');
 const router = express.Router();
 
-router.post('/type/create', createJobType);
+router.post('/type/create',isAuthenticated, createJobType);
 router.get('/type/jobs', allJobsType);
-router.put('/type/update/:type_id',isAdmin, updateJobType);
-router.delete('/type/delete/:type_id',isAdmin, deleteJobType);
+router.put('/type/update/:type_id',isAuthenticated,isAdmin, updateJobType);
+router.delete('/type/delete/:type_id',isAuthenticated,isAdmin, deleteJobType);
 
 module.exports = router;

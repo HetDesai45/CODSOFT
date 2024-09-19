@@ -29,7 +29,7 @@ export const userSignInAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
   try {
     const { data } = await axios.post(
-      `https://codsoft-pxih.onrender.com/api/signin`,
+      `http://localhost:8000/api/signin`,
       user,
       {
         withCredentials: true,
@@ -58,7 +58,7 @@ export const userSignUpAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNUP_REQUEST });
   try {
     const { data } = await axios.post(
-      `https://codsoft-pxih.onrender.com/api/signup`,
+      `http://localhost:8000/api/signup`,
       user,
       {
         withCredentials: true,
@@ -86,7 +86,7 @@ export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: USER_LOGOUT_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://codsoft-pxih.onrender.com/api/logout`
+      `http://localhost:8000/api/logout`
     );
     localStorage.removeItem("userInfo");
 
@@ -111,7 +111,7 @@ export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOADING_REQUEST });
   try {
     const { data } = await axios.get(
-      `https://codsoft-pxih.onrender.com/api/me`,
+      `http://localhost:8000/api/me`,
       {
         withCredentials: true,
       }
@@ -136,7 +136,7 @@ export const userApplyJobAction = (job) => async (dispatch) => {
   dispatch({ type: USER_APPLY_JOB_REQUEST });
   try {
     const { data } = await axios.post(
-      "https://codsoft-pxih.onrender.com/api/user/jobhistory",
+      "http://localhost:8000/api/user/jobhistory",
       job
     );
 
@@ -158,7 +158,7 @@ export const allUserAction = () => async (dispatch) => {
   dispatch({ type: ALL_USER_LOAD_REQUEST });
   try {
     const { data } = await axios.get(
-      "https://codsoft-pxih.onrender.com/api/allusers",
+      "http://localhost:8000/api/allusers",
       {
         withCredentials: true,
       }
@@ -179,7 +179,7 @@ export const deleteUserAction = (user_id) => async (dispatch) => {
   dispatch({ type: DELETE_USER_REQUEST });
   try {
     const { data } = await axios.delete(
-      `https://codsoft-pxih.onrender.com/api/user/delete/${user_id}`
+      `http://localhost:8000/api/user/delete/${user_id}`
     );
     dispatch({
       type: DELETE_USER_SUCCESS,

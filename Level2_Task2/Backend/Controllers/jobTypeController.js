@@ -2,6 +2,7 @@ const jobType = require('../models/jobTypeModel');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.createJobType = async(req,res,next) =>{
+  console.log("req.body")
   try {
     const jobt = await jobType.create({
       jobTypeName: req.body.jobTypeName,

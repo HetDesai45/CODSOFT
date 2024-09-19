@@ -5,7 +5,7 @@ exports.signup = async (req, res, next) => {
   const { email } = req.body;
   const userExist = await User.findOne({ email });
   if (userExist) {
-    return next(new ErrorResponse("E-mail laready registred", 400));
+    return next(new ErrorResponse("E-mail already registred", 400));
   }
   try {
     const user = await User.create(req.body);
@@ -44,32 +44,16 @@ exports.signin = async (req, res, next) => {
   }
 };
 
-// const sendTokenResponse = async (user, codeStatus, res) => {
-//   const token = await user.getJwtToken();
-//   return res
-//     .setHeader("Access-Control-Allow-Credentials", true)
-//     .status(codeStatus)
-//     .cookie("token", token, {
-//       httpOnly: true,
-//     })
-//     .json({
-//       success: true,
-//       role: user.role,
-//       user,
-//       token,
-//     });
-// };
-
 const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
+  const options = {
+    expires: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
+    httpOnly: true,
+  };
   res
     .status(codeStatus)
-    .cookie("token", token, { maxAge: 60 * 60 * 1000 })
-    .json({
-      success: true,
-      role: user.role,
-      user
-    });
+    .cookie("token", token, options)
+    .json({ success: true,role: user.role, user});
 };
 
 exports.logout = (req, res, next) => {
@@ -81,7 +65,6 @@ exports.logout = (req, res, next) => {
 };
 
 exports.userProfile = async (req, res, next) => {
-  console.log(req.user);
   const user = await User.findById(req.user.id).select("-password");
   res.status(200).json({
     success: true,
